@@ -1,6 +1,6 @@
 # RRT simulation in Python
 
-![logo](imgs/logo.png)
+![logo](imgs/logo2.png)
 
 El archivo RRT.py corresponde al algoritmo original
 El archivo RRTplus.py corresponde al algoritmo sesgado
