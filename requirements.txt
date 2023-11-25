@@ -1,0 +1,4 @@
+pygame
+networkx
+numpy
+typer
