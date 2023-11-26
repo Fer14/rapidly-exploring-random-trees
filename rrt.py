@@ -10,9 +10,9 @@ y_ = 40
 
 white = 255, 255, 255
 black = 0, 0, 0
-red = 255, 0, 0
-blue = 0, 0, 255
-green = 0, 255, 0
+red = 255, 87, 87
+blue = 82, 113, 255
+green = 126, 217, 87
 
 dist_x = 10
 dist_y = 10
@@ -196,7 +196,7 @@ def main():
                         )
                         font = pygame.font.SysFont("Arial", 20)
                         text = font.render(
-                            "Start = (" + str(x) + "," + str(y) + ")", True, red
+                            "Start : (" + str(x) + "," + str(y) + ")", True, red
                         )
                         textRect = text.get_rect()
                         textRect.center = (90, 490)
@@ -217,7 +217,7 @@ def main():
                         )
                         font = pygame.font.SysFont("Arial", 20)
                         text = font.render(
-                            "Goal = (" + str(x) + "," + str(y) + ")", True, green
+                            "Goal : (" + str(x) + "," + str(y) + ")", True, green
                         )
                         textRect = text.get_rect()
                         textRect.center = (410, 490)
