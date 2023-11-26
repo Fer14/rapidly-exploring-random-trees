@@ -11,9 +11,9 @@ A simple Python-based simulation of path finding using the algorithm RapidExplor
 This project is a simple simulation of path finding using the algorithm RapidExploringRandomTrees. The simulation is written in Python and uses the PyGame library for the graphical interface.
 
 
+[vid.webm](https://github.com/Fer14/rapidly-exploring-random-trees/assets/36365106/11c53836-7d00-4533-8121-040155e98035)
 
 
-https://github.com/Fer14/rapidly-exploring-random-trees/assets/36365106/4e437dd1-424b-483b-86ab-e99ef9e7906e
 
 
 
