@@ -44,6 +44,16 @@ Run the simulation:
 python rrt.py
 ```
 
+## Simplified version
+
+Aditionally there is a simplified version of the rrt algorithm that looks like this:
+
+
+To run it, simply ro:
+
+```bash
+python rrt_simplified.py
+```
 
 
 ## Contributing
