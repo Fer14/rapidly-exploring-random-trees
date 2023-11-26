@@ -1,9 +1,7 @@
 import pygame
 import random
-import time
 import math
 import networkx as nx
-import numpy
 import typer
 
 
@@ -15,7 +13,6 @@ black = 81, 85, 93
 red = 255, 87, 87
 blue = 82, 113, 255
 green = 126, 217, 87
-
 
 dist_x = 10
 dist_y = 10
@@ -31,7 +28,15 @@ class Button:
         self.text = text
 
     def create(self, screen):
-        pygame.draw.rect(screen, self.colour, [self.x, self.y, self.width, self.height])
+        pygame.draw.rect(
+            screen,
+            self.colour,
+            [self.x, self.y, self.width, self.height],
+            border_top_left_radius=10,
+            border_top_right_radius=10,
+            border_bottom_left_radius=10,
+            border_bottom_right_radius=10,
+        )
         font = pygame.font.SysFont("Arial", 14)
         text = font.render(self.text, True, white)
         textRect = text.get_rect()
@@ -84,24 +89,19 @@ def Nearest(G, point):
 
 
 def New_node(nearest_node, random_node):
-    s = []
-    s.append(random_node[0] - nearest_node[0])
-    s.append(random_node[1] - nearest_node[1])
-
-    signos = numpy.sign(s)
-
-    if signos[1] == -1:
-        y = random.randint(-10, 0)
-
+    y = random_node[1] - nearest_node[1]
+    if y > 0:
+        y = 1
     else:
-        y = random.randint(0, 10)
+        y = -1
+    x = random_node[0] - nearest_node[0]
+    if x > 0:
+        x = 1
+    else:
+        x = -1
 
-    x = math.sqrt(100 - (y**2))
-
-    if signos[0] == -1:
-        x = x * -1
-
-    return (int(nearest_node[0] + x), int(nearest_node[1] + y))
+    new_node = (nearest_node[0] + x * dist_x, nearest_node[1] + y * dist_y)
+    return new_node
 
 
 def goal_reached(node, screen):
@@ -118,9 +118,19 @@ def main():
     pygame.init()
     window_size = [500, 550]
     screen = pygame.display.set_mode(window_size)
+    pygame.display.set_caption("Rapidly Exploring Random Trees")
     screen.fill(white)
 
-    pygame.draw.rect(screen, black, (x_, y_, 440, 400), 3)
+    pygame.draw.rect(
+        screen,
+        black,
+        (x_, y_, 440, 400),
+        3,
+        border_top_left_radius=10,
+        border_top_right_radius=10,
+        border_bottom_left_radius=10,
+        border_bottom_right_radius=10,
+    )
 
     B = Button(black, 210, 470, 100, 50, "Draw env")
     B.create(screen)
@@ -161,11 +171,29 @@ def main():
 
                 elif level == 1:
                     if is_inside_game(x, y):
-                        pygame.draw.rect(screen, black, (x, y, 20, 20), 0)
+                        pygame.draw.rect(
+                            screen,
+                            black,
+                            (x, y, 20, 20),
+                            0,
+                            border_top_left_radius=10,
+                            border_top_right_radius=10,
+                            border_bottom_left_radius=10,
+                            border_bottom_right_radius=10,
+                        )
                 elif level == 2 and Start == 0:
                     if is_inside_game(x, y):
                         Start = (x, y)
-                        pygame.draw.rect(screen, red, (x, y, 20, 20), 0)
+                        pygame.draw.rect(
+                            screen,
+                            red,
+                            (x, y, 20, 20),
+                            0,
+                            border_top_left_radius=10,
+                            border_top_right_radius=10,
+                            border_bottom_left_radius=10,
+                            border_bottom_right_radius=10,
+                        )
                         font = pygame.font.SysFont("Arial", 20)
                         text = font.render(
                             "Start : (" + str(x) + "," + str(y) + ")", True, red
@@ -177,7 +205,16 @@ def main():
                 elif level == 3 and End == 0:
                     if is_inside_game(x, y):
                         End = (x, y)
-                        pygame.draw.rect(screen, green, (x, y, 20, 20), 0)
+                        pygame.draw.rect(
+                            screen,
+                            green,
+                            (x, y, 20, 20),
+                            0,
+                            border_top_left_radius=10,
+                            border_top_right_radius=10,
+                            border_bottom_left_radius=10,
+                            border_bottom_right_radius=10,
+                        )
                         font = pygame.font.SysFont("Arial", 20)
                         text = font.render(
                             "Goal : (" + str(x) + "," + str(y) + ")", True, green
@@ -209,7 +246,6 @@ def main():
             continue
         nearest_node = Nearest(G, random_node)
         new_node = New_node(nearest_node, random_node)
-
         if (
             not is_is_obstacle(new_node, screen)
             and is_inside_game(new_node[0], new_node[1])

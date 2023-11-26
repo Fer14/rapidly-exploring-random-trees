@@ -41,7 +41,7 @@ pip install -r requirements.txt
 Run the simulation:
 
 ```bash
-python app.py
+python rrt.py
 ```
 
 
