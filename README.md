@@ -2,10 +2,56 @@
 
 ![logo](imgs/logo_white.png)
 
-El archivo RRT.py corresponde al algoritmo original
-El archivo RRTplus.py corresponde al algoritmo sesgado
 
-Para ejecutarlos, escribir el comando: python [nombre del archivo].py
+A simple Python-based simulation of path finding using the algorithm RapidExploringRandomTrees 
 
+
+## Introduction
+
+This project is a simple simulation of path finding using the algorithm RapidExploringRandomTrees. The simulation is written in Python and uses the PyGame library for the graphical interface.
+
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Fer14/rapidly-exploring-random-trees
+```
+
+Change into the project directory:
+
+```bash
+cd rapidly-exploring-random-trees
+``````
+
+Install the necessary libraries:
+
+```bash
+pip install -r requirements.txt
+```
+
+
+## Usage
+
+Run the simulation:
+
+```bash
+python app.py
+```
+
+
+
+## Contributing
+
+If you would like to contribute to this project, please follow these steps:
+
+- Fork the repository on GitHub.
+- Clone the forked repository to your local machine.
+- Create a new branch for your feature or bug fix.
+- Implement your changes and test them.
+- Commit your changes with descriptive commit messages.
+- Push the changes to your fork on GitHub.
+- Create a pull request to the original repository.
 
 ![logo](imgs/logo_black.png)
