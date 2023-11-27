@@ -4,7 +4,7 @@ import math
 import networkx as nx
 import numpy
 import typer
-
+import time
 
 white = 255, 255, 255
 black = 81, 85, 93
@@ -127,8 +127,8 @@ class Instuction:
 
 
 class NodeUtils:
-    def __init__(self, type):
-        self.type = type
+    def __init__(self, simplified):
+        self.simplified = simplified
 
     def is_is_obstacle(point, screen):
         x, y = point[0], point[1]
@@ -161,10 +161,10 @@ class NodeUtils:
         return False
 
     def new_node(self, nearest_node, random_node):
-        if self.type == "normal":
-            return self.new_node_normal(nearest_node, random_node)
-        else:
+        if self.simplified:
             return self.new_node_simplified(nearest_node, random_node)
+        else:
+            return self.new_node_normal(nearest_node, random_node)
 
     def new_node_normal(self, nearest_node, random_node):
         s = []
@@ -331,12 +331,13 @@ def wait_restart(button, instruction):
                 if button.is_clicked(x, y):
                     inner_running = False
                     break
+
     return running
 
 
 def main(
-    type: str = typer.Option(
-        "normal", help="Type of the simulation type: normal or simplified"
+    simplified: bool = typer.Option(
+        False, help="Wether to run the simplified version or not"
     )
 ):
     pygame.init()
@@ -348,7 +349,7 @@ def main(
     env_width = 950
     env_height = 400
 
-    nodeutils = NodeUtils(type=type)
+    nodeutils = NodeUtils(simplified=simplified)
 
     running = True
 
@@ -377,6 +378,7 @@ def main(
         )
         run_path_finding(screen, enviroment, start, goal, nodeutils)
         running = wait_restart(button, instruction)
+        time.sleep(0.1)  # Wait for 1 second
 
     pygame.quit()
     print("Thank you for playing the simulator,we look forward to your see you again! ")
