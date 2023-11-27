@@ -53,7 +53,7 @@ Aditionally there is a simplified version of the rrt algorithm that looks like t
 To run it, simply ro:
 
 ```bash
-python rrt_simplified.py
+python rrt.py --simplified
 ```
 
 
@@ -69,4 +69,3 @@ If you would like to contribute to this project, please follow these steps:
 - Push the changes to your fork on GitHub.
 - Create a pull request to the original repository.
 
-![logo](imgs/logo_black.png)
