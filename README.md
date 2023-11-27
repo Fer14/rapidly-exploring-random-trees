@@ -1,6 +1,6 @@
 # RRT simulation in Python
 
-![logo](imgs/logo_white.png)
+![logo](imgs/logo_grey.png)
 
 
 A simple Python-based simulation of path finding using the algorithm RapidExploringRandomTrees 
