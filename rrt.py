@@ -7,7 +7,7 @@ import typer
 import time
 
 white = 255, 255, 255
-black = 81, 85, 93
+black = 0, 0, 0
 red = 255, 87, 87
 blue = 82, 113, 255
 green = 126, 217, 87
