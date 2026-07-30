@@ -58,7 +58,7 @@ class Button:
             return False
 
 
-class Enviroment:
+class Environment:
     def __init__(self, x, y, width, height, screen):
         self.x = x
         self.y = y
@@ -199,7 +199,7 @@ class NodeUtils:
         return new_node
 
 
-def build_enviroment(screen, enviroment, button, instruction):
+def build_enviroment(screen, environment, button, instruction):
     phase = 1
     start = -1
     goal = -1
@@ -231,7 +231,7 @@ def build_enviroment(screen, enviroment, button, instruction):
                         button.update(white, "...", black)
                         instruction.update("Finding path...")
                 elif phase == 1:
-                    if enviroment.is_clicked(x, y):
+                    if environment.is_clicked(x, y):
                         pygame.draw.rect(
                             screen,
                             white,
@@ -243,13 +243,13 @@ def build_enviroment(screen, enviroment, button, instruction):
                             border_bottom_right_radius=10,
                         )
                 elif phase == 2 and start == -1:
-                    if enviroment.is_clicked(x, y):
+                    if environment.is_clicked(x, y):
                         start = (x, y)
-                        enviroment.draw_point(screen, x, y, red)
+                        environment.draw_point(screen, x, y, red)
                 elif phase == 3 and goal == -1:
-                    if enviroment.is_clicked(x, y):
+                    if environment.is_clicked(x, y):
                         goal = (x, y)
-                        enviroment.draw_point(screen, x, y, green)
+                        environment.draw_point(screen, x, y, green)
 
             if phase == 4:
                 running = False
@@ -257,10 +257,10 @@ def build_enviroment(screen, enviroment, button, instruction):
 
         pygame.display.update()
 
-    return start, goal, enviroment
+    return start, goal, environment
 
 
-def run_path_finding(screen, enviroment, start, goal, nodeutils):
+def run_path_finding(screen, environment, start, goal, nodeutils):
     parent = {}
     parent[start] = (-1, -1)
     G = nx.Graph()
@@ -274,7 +274,7 @@ def run_path_finding(screen, enviroment, start, goal, nodeutils):
                 running = False
                 break
 
-        random_node = enviroment.random_point()
+        random_node = environment.random_point()
         if NodeUtils.is_is_obstacle(random_node, screen):
             continue
         nearest_node = NodeUtils.nearest(G, random_node)
@@ -282,7 +282,7 @@ def run_path_finding(screen, enviroment, start, goal, nodeutils):
 
         if (
             not NodeUtils.is_is_obstacle(new_node, screen)
-            and enviroment.is_clicked(new_node[0], new_node[1])
+            and environment.is_clicked(new_node[0], new_node[1])
             and new_node not in parent
         ):
             G.add_node(new_node)
@@ -367,16 +367,16 @@ def main(
         )
         button.display()
         instruction = Instuction(
-            "Draw enviroment...",
+            "Draw environment...",
             screen,
         )
         instruction.display()
-        enviroment = Enviroment(x_, y_, env_width, env_height, screen)
-        enviroment.display()
-        start, goal, enviroment = build_enviroment(
-            screen, enviroment, button, instruction
+        environment = Environment(x_, y_, env_width, env_height, screen)
+        environment.display()
+        start, goal, environment = build_enviroment(
+            screen, environment, button, instruction
         )
-        run_path_finding(screen, enviroment, start, goal, nodeutils)
+        run_path_finding(screen, environment, start, goal, nodeutils)
         running = wait_restart(button, instruction)
         time.sleep(0.1)  # Wait for 1 second
 
